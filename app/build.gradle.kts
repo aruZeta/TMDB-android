@@ -1,5 +1,9 @@
 @file:Suppress("UnstableApiUsage")
 
+import java.io.FileInputStream
+import java.io.FileNotFoundException
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -23,6 +27,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "TMDB_API_KEY", getTmdbApiKey())
     }
 
     buildTypes {
@@ -34,6 +40,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -114,4 +121,11 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
+}
+
+fun getTmdbApiKey(): String = rootProject.file("secrets.properties").let {
+    if (it.exists()) Properties().let { props ->
+        props.load(FileInputStream(it))
+        props.getProperty("TMDB_API_KEY")
+    } else throw FileNotFoundException()
 }

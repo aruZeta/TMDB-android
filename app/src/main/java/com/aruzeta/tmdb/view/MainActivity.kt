@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.aruzeta.tmdb.BuildConfig
 import com.aruzeta.tmdb.ui.Destination
 import com.aruzeta.tmdb.ui.theme.TMDBTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +26,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 composable(Destination.FirstScreen.route) {
                     Text(text = "Hello world")
+                    Text(text = "Api key: ${BuildConfig.TMDB_API_KEY}")
                 }
             }
         } }
