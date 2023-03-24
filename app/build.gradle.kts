@@ -104,10 +104,8 @@ dependencies {
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofit2Version")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofit2Version")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit2Version")
 
-    // Retrofit Gson
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
