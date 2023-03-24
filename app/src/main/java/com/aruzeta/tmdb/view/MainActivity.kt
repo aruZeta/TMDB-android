@@ -1,6 +1,5 @@
 package com.aruzeta.tmdb.view
 
-import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,7 +11,6 @@ import com.aruzeta.tmdb.BuildConfig
 import com.aruzeta.tmdb.ui.Destination
 import com.aruzeta.tmdb.ui.theme.TMDBTheme
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -32,6 +30,3 @@ class MainActivity : ComponentActivity() {
         } }
     }
 }
-
-@HiltAndroidApp
-class TMDBApp : Application()
