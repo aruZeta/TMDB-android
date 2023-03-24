@@ -9,6 +9,7 @@ import retrofit2.http.Path
 
 interface TmdbApi {
     @GET("trending/{mediaType}/{timeWindow}")
+    @InjectAuth
     suspend fun getTrending(
         @Path("mediaType") mediaType: MediaType,
         @Path("timeWindow") timeWindow: TimeWindow,
