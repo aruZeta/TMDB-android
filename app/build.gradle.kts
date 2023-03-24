@@ -22,7 +22,7 @@ android {
         versionCode = 1
         versionName = "0.0.1"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.aruzeta.tmdb.HiltTestRunner"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -97,6 +97,8 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
     // Hilt navigation
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
@@ -106,6 +108,8 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-moshi:$retrofit2Version")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit2Version")
 
+    // OkHttp3
+    androidTestImplementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
