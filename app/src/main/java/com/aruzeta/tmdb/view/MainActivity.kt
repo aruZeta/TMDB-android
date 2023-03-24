@@ -34,13 +34,4 @@ class MainActivity : ComponentActivity() {
 }
 
 @HiltAndroidApp
-class TMDBApp : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        instance = this
-    }
-
-    companion object {
-        var instance: TMDBApp? = null
-    }
-}
+class TMDBApp : Application()
