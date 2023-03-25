@@ -22,13 +22,13 @@ android {
         versionCode = 1
         versionName = "0.0.1"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.aruzeta.tmdb.HiltTestRunner"
 
         vectorDrawables {
             useSupportLibrary = true
         }
 
-        buildConfigField("String", "TMDB_API_KEY", getTmdbApiKey())
+        buildConfigField("String", "TMDB_API_READ_ACCESS_TOKEN", getTmdbApiReadAccessToken())
     }
 
     buildTypes {
@@ -97,6 +97,8 @@ dependencies {
     // Hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
     // Hilt navigation
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
@@ -104,10 +106,10 @@ dependencies {
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofit2Version")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofit2Version")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit2Version")
 
-    // Retrofit Gson
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // OkHttp3
+    androidTestImplementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
@@ -124,9 +126,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
 }
 
-fun getTmdbApiKey(): String = rootProject.file("secrets.properties").let {
+fun getTmdbApiReadAccessToken(): String = rootProject.file("secrets.properties").let {
     if (it.exists()) Properties().let { props ->
         props.load(FileInputStream(it))
-        props.getProperty("TMDB_API_KEY")
+        props.getProperty("TMDB_API_READ_ACCESS_TOKEN")
     } else throw FileNotFoundException()
 }

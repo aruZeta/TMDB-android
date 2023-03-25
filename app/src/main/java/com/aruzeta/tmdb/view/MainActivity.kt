@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 composable(Destination.FirstScreen.route) {
                     Text(text = "Hello world")
-                    Text(text = "Api key: ${BuildConfig.TMDB_API_KEY}")
+                    Text(text = "Api read access token: ${BuildConfig.TMDB_API_READ_ACCESS_TOKEN}")
                 }
             }
         } }
