@@ -12,10 +12,12 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object TestTmdbApiDI {
+    @Singleton
     @Provides
     fun provideTmdbApi(): TmdbApi = lazy {
         return@lazy Retrofit.Builder()
@@ -31,6 +33,7 @@ object TestTmdbApiDI {
             .create(TmdbApi::class.java)
     }.value
 
+    @Singleton
     @Provides
     fun provideTestableTmdbRepository(
         tmdbApi: TmdbApi
