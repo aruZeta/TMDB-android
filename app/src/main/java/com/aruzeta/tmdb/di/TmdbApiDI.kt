@@ -15,14 +15,16 @@ import javax.inject.Singleton
 object TmdbApiDI {
     @Singleton
     @Provides
-    fun provideTmdbApi(): TmdbApi = lazy {
-        return@lazy Retrofit.Builder()
-            .baseUrl(TMDB_API_URL)
-            .client(OkHttpClient.Builder().addInterceptor(AuthInjector()).build())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(TmdbApi::class.java)
-    }.value
+    fun provideTmdbApi(): TmdbApi = Retrofit.Builder()
+        .baseUrl(TMDB_API_URL)
+        .client(
+            OkHttpClient.Builder()
+                .addInterceptor(AuthInjector())
+                .build()
+        )
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+        .create(TmdbApi::class.java)
 
     @Singleton
     @Provides
