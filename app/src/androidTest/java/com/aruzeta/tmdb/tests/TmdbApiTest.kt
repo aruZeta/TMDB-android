@@ -3,6 +3,7 @@ package com.aruzeta.tmdb.tests
 import android.util.Log
 import com.aruzeta.tmdb.api.tmdb.TestableTmdbRepository
 import com.aruzeta.tmdb.di.TmdbApiDI
+import com.aruzeta.tmdb.di.TmdbRepositoryDI
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -13,7 +14,10 @@ import org.junit.Test
 import javax.inject.Inject
 
 @HiltAndroidTest
-@UninstallModules(TmdbApiDI::class)
+@UninstallModules(
+    TmdbApiDI::class,
+    TmdbRepositoryDI::class
+)
 class TmdbApiTest {
     @get:Rule
     val hiltRule = HiltAndroidRule(this)

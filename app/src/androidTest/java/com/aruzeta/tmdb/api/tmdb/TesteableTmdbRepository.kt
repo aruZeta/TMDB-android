@@ -2,6 +2,7 @@ package com.aruzeta.tmdb.api.tmdb
 
 import com.aruzeta.tmdb.model.tmdb.api.TmdbApiRoute
 import com.aruzeta.tmdb.model.tmdb.data.TrendingList
+import com.aruzeta.tmdb.repository.tmdb.ITmdbRepository
 
 class TestableTmdbRepository(
     private val tmdbApi: TmdbApi

@@ -2,7 +2,6 @@ package com.aruzeta.tmdb.di
 
 import com.aruzeta.tmdb.api.tmdb.AuthInjector
 import com.aruzeta.tmdb.api.tmdb.TMDB_API_URL
-import com.aruzeta.tmdb.api.tmdb.TestableTmdbRepository
 import com.aruzeta.tmdb.api.tmdb.TmdbApi
 import com.aruzeta.tmdb.model.tmdb.api.TmdbApiRouteConverterFactory
 import dagger.Module
@@ -32,10 +31,4 @@ object TestTmdbApiDI {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(TmdbApi::class.java)
-
-    @Singleton
-    @Provides
-    fun provideTestableTmdbRepository(
-        tmdbApi: TmdbApi
-    ): TestableTmdbRepository = TestableTmdbRepository(tmdbApi)
 }
