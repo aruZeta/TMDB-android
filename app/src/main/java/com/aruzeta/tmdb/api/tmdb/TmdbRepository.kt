@@ -1,15 +1,14 @@
 package com.aruzeta.tmdb.api.tmdb
 
-import com.aruzeta.tmdb.model.tmdb.api.MediaType
-import com.aruzeta.tmdb.model.tmdb.api.TimeWindow
+import com.aruzeta.tmdb.model.tmdb.api.TmdbApiRoute
 import com.aruzeta.tmdb.model.tmdb.data.TrendingList
 import retrofit2.Response
 import javax.inject.Inject
 
 interface ITmdbRepository {
     suspend fun getTrending(
-        mediaType: MediaType = MediaType.Movie,
-        timeWindow: TimeWindow = TimeWindow.Day,
+        mediaType: TmdbApiRoute.MediaType = TmdbApiRoute.MediaType.Movie,
+        timeWindow: TmdbApiRoute.TimeWindow = TmdbApiRoute.TimeWindow.Day,
     ): TrendingList
 }
 
@@ -20,8 +19,8 @@ class TmdbRepository @Inject constructor(
         this.let { if (it.isSuccessful) it.body() ?: default() else default() }
 
     override suspend fun getTrending(
-        mediaType: MediaType,
-        timeWindow: TimeWindow,
+        mediaType: TmdbApiRoute.MediaType,
+        timeWindow: TmdbApiRoute.TimeWindow,
     ): TrendingList =
         tmdbApi.getTrending(mediaType, timeWindow).getResult { TrendingList(0, emptyList()) }
 }

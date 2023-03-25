@@ -1,7 +1,6 @@
 package com.aruzeta.tmdb.api.tmdb
 
-import com.aruzeta.tmdb.model.tmdb.api.MediaType
-import com.aruzeta.tmdb.model.tmdb.api.TimeWindow
+import com.aruzeta.tmdb.model.tmdb.api.TmdbApiRoute
 import com.aruzeta.tmdb.model.tmdb.data.TrendingList
 import retrofit2.Response
 import retrofit2.http.GET
@@ -11,8 +10,8 @@ interface TmdbApi {
     @GET("trending/{mediaType}/{timeWindow}")
     @InjectAuth
     suspend fun getTrending(
-        @Path("mediaType") mediaType: MediaType,
-        @Path("timeWindow") timeWindow: TimeWindow,
+        @Path("mediaType") mediaType: TmdbApiRoute.MediaType,
+        @Path("timeWindow") timeWindow: TmdbApiRoute.TimeWindow,
     ): Response<TrendingList>
 }
 
