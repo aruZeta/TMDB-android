@@ -28,7 +28,7 @@ android {
             useSupportLibrary = true
         }
 
-        buildConfigField("String", "TMDB_API_KEY", getTmdbApiKey())
+        buildConfigField("String", "TMDB_API_READ_ACCESS_TOKEN", getTmdbApiReadAccessToken())
     }
 
     buildTypes {
@@ -126,9 +126,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
 }
 
-fun getTmdbApiKey(): String = rootProject.file("secrets.properties").let {
+fun getTmdbApiReadAccessToken(): String = rootProject.file("secrets.properties").let {
     if (it.exists()) Properties().let { props ->
         props.load(FileInputStream(it))
-        props.getProperty("TMDB_API_KEY")
+        props.getProperty("TMDB_API_READ_ACCESS_TOKEN")
     } else throw FileNotFoundException()
 }

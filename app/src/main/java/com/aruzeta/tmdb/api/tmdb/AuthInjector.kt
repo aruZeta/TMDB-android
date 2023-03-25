@@ -13,7 +13,7 @@ class AuthInjector : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response = chain.proceed(
         chain.request().let { request ->
             if (request.hasAnnotation(InjectAuth::class.java)) request.newBuilder()
-                .addHeader("Authorization", "Bearer ${BuildConfig.TMDB_API_KEY}")
+                .addHeader("Authorization", "Bearer ${BuildConfig.TMDB_API_READ_ACCESS_TOKEN}")
                 .build()
             else request
         }
