@@ -4,6 +4,7 @@ import com.aruzeta.tmdb.api.tmdb.AuthInjector
 import com.aruzeta.tmdb.api.tmdb.TMDB_API_URL
 import com.aruzeta.tmdb.api.tmdb.TestableTmdbRepository
 import com.aruzeta.tmdb.api.tmdb.TmdbApi
+import com.aruzeta.tmdb.model.tmdb.api.TmdbApiRouteConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +28,7 @@ object TestTmdbApiDI {
                 .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
                 .build()
         )
+        .addConverterFactory(TmdbApiRouteConverterFactory())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(TmdbApi::class.java)

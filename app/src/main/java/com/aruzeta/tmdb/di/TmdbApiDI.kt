@@ -1,6 +1,7 @@
 package com.aruzeta.tmdb.di
 
 import com.aruzeta.tmdb.api.tmdb.*
+import com.aruzeta.tmdb.model.tmdb.api.TmdbApiRouteConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,6 +23,7 @@ object TmdbApiDI {
                 .addInterceptor(AuthInjector())
                 .build()
         )
+        .addConverterFactory(TmdbApiRouteConverterFactory())
         .addConverterFactory(GsonConverterFactory.create())
         .build()
         .create(TmdbApi::class.java)

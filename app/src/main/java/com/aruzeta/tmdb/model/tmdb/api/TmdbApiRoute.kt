@@ -19,3 +19,15 @@ sealed interface TmdbApiRoute {
         object Week : TimeWindow("week")
     }
 }
+
+class TmdbApiRouteConverter : Converter<TmdbApiRoute, String> {
+    override fun convert(value: TmdbApiRoute): String = value.route
+}
+
+class TmdbApiRouteConverterFactory : Converter.Factory() {
+    override fun stringConverter(
+        type: Type,
+        annotations: Array<out Annotation>,
+        retrofit: Retrofit
+    ): Converter<TmdbApiRoute, String> = TmdbApiRouteConverter()
+}
