@@ -1,10 +1,17 @@
-ext {
-    extra["hiltVersion"] = "2.45"
-}
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
 
-plugins {
-    id("com.android.application") version "7.4.1" apply false
-    id("com.android.library") version "7.4.1" apply false
-    id("org.jetbrains.kotlin.android") version "1.8.0" apply false
-    id("com.google.dagger.hilt.android") version "2.45" apply false
+    dependencies {
+        val gradleVersion = properties["gradleVersion"]
+        val kotlinVersion = properties["kotlinVersion"]
+        val daggerHiltVersion = properties["daggerHiltVersion"]
+
+        classpath("com.android.tools.build:gradle:$gradleVersion")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:$daggerHiltVersion")
+    }
 }
