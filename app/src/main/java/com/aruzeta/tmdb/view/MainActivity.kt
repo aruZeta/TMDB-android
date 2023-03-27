@@ -8,7 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.aruzeta.tmdb.BuildConfig
-import com.aruzeta.tmdb.ui.Destination
+import com.aruzeta.tmdb.ui.utils.Destination
 import com.aruzeta.tmdb.ui.theme.TMDBTheme
 import dagger.hilt.android.AndroidEntryPoint
 
