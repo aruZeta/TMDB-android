@@ -9,13 +9,14 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object TmdbApiDI {
+object TestAppModule {
     @Singleton
     @Provides
     fun provideTmdbApi(): TmdbApi = Retrofit.Builder()
@@ -23,6 +24,7 @@ object TmdbApiDI {
         .client(
             OkHttpClient.Builder()
                 .addInterceptor(AuthInjector())
+                .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.HEADERS))
                 .build()
         )
         .addConverterFactory(TmdbApiRouteConverterFactory())
