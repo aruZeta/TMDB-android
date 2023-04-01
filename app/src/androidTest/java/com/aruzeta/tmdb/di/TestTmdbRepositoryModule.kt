@@ -14,7 +14,7 @@ import javax.inject.Singleton
 abstract class TestTmdbRepositoryModule {
     @Binds
     @Singleton
-    abstract fun bindTesteableTmdbRepository(
+    abstract fun bindTestableTdbRepository(
         tmdbRepository: TestableTmdbRepository
     ): ITmdbRepository
 }
