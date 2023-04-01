@@ -33,7 +33,7 @@ class TmdbApiTest {
     @Test
     fun getTrendingMovies() = runBlocking {
         val result = tmdbRepository.getTrending()
-        Log.d("Trending movies", result.results.joinToString("\n") { it.title })
+        Log.d("Trending movies", result.results.joinToString("\n") { "$it" })
         assert(result.page != 0) { "Received 0 pages of trending movies" }
         assert(result.results.isNotEmpty()) { "Received empty list of trending movies" }
     }

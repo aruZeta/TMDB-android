@@ -19,8 +19,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val tmdbRepository: ITmdbRepository
 ) : ViewModel(), IHomeViewModel {
-    private val _trendingFilms = mutableStateListOf<Movie>()
-    override val trendingFilms: SnapshotStateList<Movie> = _trendingFilms
+    private val _trendingFilms = mutableStateListOf<Movie.MinimumData>()
+    override val trendingFilms: SnapshotStateList<Movie.MinimumData> = _trendingFilms
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
     override val uiState = _uiState

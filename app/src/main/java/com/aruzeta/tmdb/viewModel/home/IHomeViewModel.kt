@@ -6,5 +6,5 @@ import com.aruzeta.tmdb.viewModel.utils.ILoading
 import com.aruzeta.tmdb.viewModel.utils.IUiEvent
 
 interface IHomeViewModel : ILoading, IUiEvent {
-    val trendingFilms: SnapshotStateList<Movie>
+    val trendingFilms: SnapshotStateList<Movie.MinimumData>
 }
