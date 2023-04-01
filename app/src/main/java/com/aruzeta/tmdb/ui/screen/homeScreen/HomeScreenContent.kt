@@ -51,7 +51,7 @@ private inline fun MovieList(
 
 @Composable
 private inline fun MovieCard(
-    movie: Movie,
+    movie: Movie.MinimumData,
 ) = Surface(
     modifier = Modifier.fillMaxWidth(),
     shape = RoundedCornerShape(10.dp),
