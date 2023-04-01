@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.aruzeta.tmdb.model.tmdb.data.Movie
 import com.aruzeta.tmdb.ui.screen.utils.LoadingContent
 import com.aruzeta.tmdb.ui.utils.Previews
@@ -62,6 +63,12 @@ private inline fun MovieCard(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(10.dp),
     ) {
+        AsyncImage(
+            model = "https://image.tmdb.org/t/p/original${movie.imagePath}",
+            modifier = Modifier.fillMaxSize(),
+            // placeholder = debugPlaceholder(debugPreview = com.aruzeta.tmdb.R.drawable.template_image),
+            contentDescription = null,
+        )
         Text(text = movie.title)
         Spacer(modifier = Modifier.width(10.dp))
         Text(text = "${movie.id}")
