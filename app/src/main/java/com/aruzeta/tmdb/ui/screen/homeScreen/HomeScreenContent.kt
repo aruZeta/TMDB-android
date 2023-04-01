@@ -59,8 +59,8 @@ private inline fun MovieCard(
     color = MaterialTheme.colorScheme.primaryContainer,
     onClick = {  },
 ) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
+    Column(
+        horizontalAlignment = Alignment.Start,
         modifier = Modifier.padding(10.dp),
     ) {
         AsyncImage(
