@@ -2,8 +2,8 @@ package com.aruzeta.tmdb.tests
 
 import android.util.Log
 import com.aruzeta.tmdb.api.tmdb.TestableTmdbRepository
-import com.aruzeta.tmdb.di.TmdbApiDI
-import com.aruzeta.tmdb.di.TmdbRepositoryDI
+import com.aruzeta.tmdb.di.TestAppModule
+import com.aruzeta.tmdb.di.TestTmdbRepositoryModule
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
@@ -15,8 +15,8 @@ import javax.inject.Inject
 
 @HiltAndroidTest
 @UninstallModules(
-    TmdbApiDI::class,
-    TmdbRepositoryDI::class
+    TestAppModule::class,
+    TestTmdbRepositoryModule::class
 )
 class TmdbApiTest {
     @get:Rule
@@ -33,7 +33,7 @@ class TmdbApiTest {
     @Test
     fun getTrendingMovies() = runBlocking {
         val result = tmdbRepository.getTrending()
-        Log.d("Trending movies", result.results.joinToString("\n") { it.title })
+        Log.d("Trending movies", result.results.joinToString("\n") { "$it" })
         assert(result.page != 0) { "Received 0 pages of trending movies" }
         assert(result.results.isNotEmpty()) { "Received empty list of trending movies" }
     }

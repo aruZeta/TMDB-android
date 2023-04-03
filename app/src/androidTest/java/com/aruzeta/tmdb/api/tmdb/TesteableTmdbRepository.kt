@@ -3,8 +3,9 @@ package com.aruzeta.tmdb.api.tmdb
 import com.aruzeta.tmdb.model.tmdb.api.TmdbApiRoute
 import com.aruzeta.tmdb.model.tmdb.data.TrendingList
 import com.aruzeta.tmdb.repository.tmdb.ITmdbRepository
+import javax.inject.Inject
 
-class TestableTmdbRepository(
+class TestableTmdbRepository @Inject constructor(
     private val tmdbApi: TmdbApi
 ) : ITmdbRepository {
     override suspend fun getTrending(
