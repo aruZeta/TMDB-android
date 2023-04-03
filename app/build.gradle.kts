@@ -6,9 +6,9 @@ import java.util.Properties
 
 plugins {
     id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    kotlin("android")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -20,15 +20,15 @@ android {
         minSdk = 21
         targetSdk = 33
         versionCode = 1
-        versionName = "0.0.1"
+        versionName = "0.1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.aruzeta.tmdb.HiltTestRunner"
 
         vectorDrawables {
             useSupportLibrary = true
         }
 
-        buildConfigField("String", "TMDB_API_KEY", getTmdbApiKey())
+        buildConfigField("String", "TMDB_API_READ_ACCESS_TOKEN", getTmdbApiReadAccessToken())
     }
 
     buildTypes {
@@ -66,67 +66,81 @@ android {
 }
 
 dependencies {
-    val composeVersion = "1.3.3"
-    val lifecycleVersion = "2.6.0"
-    val hiltVersion = rootProject.extra["hiltVersion"]
-    val retrofit2Version = "2.9.0"
-    val coroutinesVersion = "1.1.0"
+    val composeVersion = properties["composeVersion"]
+    val lifecycleVersion = properties["lifecycleVersion"]
+    val daggerHiltVersion = properties["daggerHiltVersion"]
+    val retrofit2Version = properties["retrofit2Version"]
+    val coroutinesVersion = properties["coroutinesVersion"]
+    val androidCoreVersion = properties["androidCoreVersion"]
+    val accompanistVersion = properties["accompanistVersion"]
+    val datastorePreferencesVersion = properties["datastorePreferencesVersion"]
+    val activityComposeVersion = properties["activityComposeVersion"]
+    val material3Version = properties["material3Version"]
+    val navigationComposeVersion = properties["navigationComposeVersion"]
+    val hiltNavigationComposeVersion = properties["hiltNavigationComposeVersion"]
+    val okhttp3LoggingInterceptorVersion = properties["okhttp3LoggingInterceptorVersion"]
+    val coilComposeVersion = properties["coilComposeVersion"]
+    val junitVersion = properties["junitVersion"]
+    val androidxJunitVersion = properties["androidxJunitVersion"]
+    val espressoCoreVersion = properties["espressoCoreVersion"]
 
     // Core
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:$androidCoreVersion")
 
     // System UI
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.27.0")
+    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
 
     // Datastore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:$datastorePreferencesVersion")
 
     // Lifecycle
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
 
     // Compose
-    implementation("androidx.activity:activity-compose:1.6.1")
+    implementation("androidx.activity:activity-compose:$activityComposeVersion")
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation("androidx.compose.material3:material3:1.1.0-alpha08")
+    implementation("androidx.compose.material3:material3:$material3Version")
 
     // Compose Navigation
-    implementation("androidx.navigation:navigation-compose:2.5.3")
+    implementation("androidx.navigation:navigation-compose:$navigationComposeVersion")
 
     // Hilt
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation("com.google.dagger:hilt-android:$daggerHiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$daggerHiltVersion")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:$daggerHiltVersion")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$daggerHiltVersion")
 
     // Hilt navigation
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion")
 
     // Retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofit2Version")
     implementation("com.squareup.retrofit2:converter-moshi:$retrofit2Version")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofit2Version")
 
-    // Retrofit Gson
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // OkHttp3
+    androidTestImplementation("com.squareup.okhttp3:logging-interceptor:$okhttp3LoggingInterceptorVersion")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
 
     // Coil Images
-    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation("io.coil-kt:coil-compose:$coilComposeVersion")
 
     // Others
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation("junit:junit:$junitVersion")
+    androidTestImplementation("androidx.test.ext:junit:$androidxJunitVersion")
+    androidTestImplementation("androidx.test.espresso:espresso-core:$espressoCoreVersion")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeVersion")
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
 }
 
-fun getTmdbApiKey(): String = rootProject.file("secrets.properties").let {
+fun getTmdbApiReadAccessToken(): String = rootProject.file("secrets.properties").let {
     if (it.exists()) Properties().let { props ->
         props.load(FileInputStream(it))
-        props.getProperty("TMDB_API_KEY")
+        props.getProperty("TMDB_API_READ_ACCESS_TOKEN")
     } else throw FileNotFoundException()
 }
