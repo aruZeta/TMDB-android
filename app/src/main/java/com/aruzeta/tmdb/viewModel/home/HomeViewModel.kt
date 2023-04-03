@@ -13,14 +13,14 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import okhttp3.internal.toImmutableList
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val tmdbRepository: ITmdbRepository
 ) : ViewModel(), IHomeViewModel {
-    private val _trendingFilms = mutableStateListOf<Movie.MinimumData>()
-    override val trendingFilms: SnapshotStateList<Movie.MinimumData> = _trendingFilms
+    override val trendingFilms: SnapshotStateList<Movie.MinimumData> = mutableStateListOf()
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Loading)
     override val uiState = _uiState
@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _trendingFilms.addAll(tmdbRepository.getTrending().results)
+            trendingFilms.addAll(tmdbRepository.getTrending().results)
             _uiState.value = UiState.Success
         }
     }

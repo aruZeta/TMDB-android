@@ -2,7 +2,7 @@
 
 package com.aruzeta.tmdb.ui.screen.homeScreen
 
-import androidx.compose.animation.expandVertically
+import com.aruzeta.tmdb.R
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -25,6 +25,7 @@ import coil.compose.AsyncImage
 import com.aruzeta.tmdb.model.tmdb.data.Movie
 import com.aruzeta.tmdb.ui.screen.utils.LoadingContent
 import com.aruzeta.tmdb.ui.utils.Previews
+import com.aruzeta.tmdb.ui.utils.debugPlaceholder
 import com.aruzeta.tmdb.viewModel.home.IHomeViewModel
 
 @Composable
@@ -74,7 +75,7 @@ private inline fun MovieCard(
         AsyncImage(
             model = "https://image.tmdb.org/t/p/original${movie.imagePath}",
             modifier = Modifier.fillMaxWidth(),
-            // placeholder = debugPlaceholder(debugPreview = com.aruzeta.tmdb.R.drawable.template_image),
+            placeholder = debugPlaceholder(debugPreview = R.drawable.preview_poster),
             contentDescription = null,
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -91,3 +92,19 @@ private inline fun MovieCard(
 @Composable
 @Preview(showBackground = true)
 private fun MovieCardPreview() = MovieCard(movie = Previews.Model.movie)
+
+@Composable
+@Preview(showBackground = true)
+private fun MovieListPreview() = MovieList(
+    modifier = Modifier,
+    viewModel = Previews.ViewModel.HomeViewModel,
+)
+
+@Composable
+@Preview(showBackground = true)
+fun HomeScreenContentPreview(
+    modifier: Modifier = Modifier,
+) = HomeScreenContent(
+    modifier = modifier,
+    viewModel = Previews.ViewModel.HomeViewModel,
+)
